@@ -1,29 +1,37 @@
 import random
-from card import *
+from card import Card
 
 class Deck:
 
-    deck =[[],[],[],[],[]]
+    deck =[[],[],[],[]]
 
     def __init__(self):
         self.reset()
 
-    def show(self):
-        print(self.deck)
-
     def reset(self):
-        for i in range(1, 5):
-            for ii in range(1, 15):
-                self.deck[i].append(Card(ii,i))
+        for i in range(4):
+            for ii in range(1,15):
+                self.deck[i].append(Card(i+1,ii))
 
     def draw(self):
-        sym = random.randint(1,5)
-        num = random.randint(1,15)
-        card = Card(num,sym)
+        dra = True
+        while dra:
+            sym = random.randint(1,4)
+            num = random.randint(1,14)
+            card = Card(sym,num)
+            dra  = self.deck[sym-1][num-1] == "drawn"
+            self.deck[sym-1][num-1] = "drawn"
+            
         return card
+    
+    def isDrawn(self,card):
+        return self.deck[[card.symbol-1][card.number-1]] == "drawn"
 
+    
     
     def __str__(self):
-        return str(self.deck)
-
-    
+        d = []
+        for i in range(4):
+            for ii in range(1,15):
+                d.append(str(self.deck[i][ii-1]))
+        return str(d)
