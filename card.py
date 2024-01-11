@@ -1,4 +1,4 @@
-class Card:
+eclass Card:
 
     dict = {1: "Clubs", 2: "Spades", 3: "Hearts", 4: "Diamonds", 11: "Jack", 12:"Queen", 13:"King", 14:"Ace"}
     number = 0
