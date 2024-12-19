@@ -33,7 +33,7 @@ def showHand(hand):
     
 def houseLosing(house_hand, deck, player_score):
     total = score(house_hand)
-    while total < player_score and total < 21:
+    while total < player_score and total < 21 and player_score < 21:
         house_hand.append(deck.draw())
         total = score(house_hand)
     return(house_hand,deck)
@@ -59,7 +59,9 @@ def Conc(player_total, house_total):
     if player_total == house_total:
         print("Tie")
     elif player_total > 21 or house_total > 21:
-        if player_total > 21:
+        if player_total > 21 and house_total > 21:
+            print("tie")
+        elif player_total > 21:
             print("the house wins")
         else:
             print("You win")
