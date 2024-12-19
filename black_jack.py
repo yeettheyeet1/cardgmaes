@@ -25,8 +25,6 @@ def black_jack():
     if input("Enter y if you wish to play again ").lower().strip() == "y":
         black_jack()
 
-
-
 def showHand(hand):
     p_hand = ""
     for i in range(len(hand)):
@@ -75,5 +73,5 @@ def Conc(player_total, house_total):
     else:
         print("You win")
 
-
-black_jack()
+if __name__ == "__main__":
+    black_jack()
