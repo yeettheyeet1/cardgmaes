@@ -9,16 +9,18 @@ def black_jack():
     deck = Deck()
     player_hand = [deck.draw(),deck.draw()]
     house_hand = [deck.draw(),deck.draw()]
-    player_total,house_total = total(player_hand, house_hand)
+    player_total,house_total = score(player_hand),score(house_hand)
     end = False
     while player_total < 21 and house_total < 21 and end == False:
-            print("Your hand is:", showHand(player_hand))
-            if input("If you wish to draw another card enter y ").lower().strip() == "y":
-                player_hand.append(deck.draw())
-                player_total,house_total = total(player_hand, house_hand)
-            else:
-                end = True
-    print("Your hand is:",showHand(player_hand) , "\nThe house's hand is: ", showHand(house_hand))
+        print("Your hand is:", showHand(player_hand), "the total is: ", player_total)
+        if input("If you wish to draw another card enter y ").lower().strip() == "y":
+            player_hand.append(deck.draw())
+        else:
+            end = True
+        player_total = score(player_hand)
+    house_hand,deck = houseLosing(house_hand,deck,player_total)
+    house_total = score(house_hand)
+    print("Your hand is:",showHand(player_hand) , player_total, "total" , "\nThe house's hand is:", showHand(house_hand), house_total, "total")
     Conc(player_total,house_total)
     if input("Enter y if you wish to play again ").lower().strip() == "y":
         black_jack()
@@ -31,56 +33,45 @@ def showHand(hand):
         p_hand += str(hand[i]) + " "
     return p_hand
     
+def houseLosing(house_hand, deck, player_score):
+    total = score(house_hand)
+    while total < player_score and total < 21:
+        house_hand.append(deck.draw())
+        total = score(house_hand)
+    return(house_hand,deck)
+
+def score(hand):
+    total = 0
+    aces=0
+    for card in hand:
+        if card.number == 14:
+            aces +=1
+        else:
+            total += card.value
+    for i in range(aces):
+        if total < 11:
+            total += 11
+        else:
+            total += 1
+    return total
 
 
-
-def total(player_hand, house_hand):
-    p_total = 0
-    h_total = 0
-
-    for i in range(len(player_hand)):
-        num = player_hand[i].number
-        if num in range(1,15):
-            if num < 10:
-                p_total += num
-            elif num < 14:
-                p_total += 10
-            else:
-                if p_total < 11:
-                    p_total += 11
-                else:
-                    p_total += 1
-
-    for i in range(len(house_hand)):
-        num = house_hand[i].number
-        if num in range(1,15):
-            if num < 10:
-                h_total += num
-            elif num < 14:
-                h_total += 10
-            else:
-                if h_total < 11:
-                    h_total += 11
-                else:
-                    h_total += 1
-
-    return p_total,h_total
 
 def Conc(player_total, house_total):
     if player_total == house_total:
         print("Tie")
     elif player_total > 21 or house_total > 21:
         if player_total > 21:
-            print("You lose")
+            print("the house wins")
         else:
             print("You win")
     elif player_total == 21 or house_total == 21:
         if house_total == 21:
-            print("You lose")
+            print("the house wins")
         else:
             print("You win")
     elif player_total < house_total:
-        print("You lose")
+        print("the house wins")
     else:
         print("You win")
 
