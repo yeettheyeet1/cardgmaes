@@ -1,11 +1,16 @@
 from deck import Deck
-from card import Card
+from appJar import gui
+###from card import Card
 
-def black_jack():
-    print("Welcome to my black jack game")
-    s = ""
-    while s != "s":
-        s = input("Enter s to start ").lower().strip()
+def black_jack(First):
+    Gui = gui()
+    if First:
+        Gui.startSubWindow("Start",)
+        if Gui.yesNoBox("start", "Do You want to play poker",parent="Start"):
+            Gui.stopSubWindow()
+            print("Welcome to my black jack game")
+        else:
+            return
     deck = Deck()
     player_hand = [deck.draw(),deck.draw()]
     house_hand = [deck.draw(),deck.draw()]
@@ -22,8 +27,11 @@ def black_jack():
     house_total = score(house_hand)
     print("Your hand is:",showHand(player_hand) , player_total, "total" , "\nThe house's hand is:", showHand(house_hand), house_total, "total")
     Conc(player_total,house_total)
-    if input("Enter y if you wish to play again ").lower().strip() == "y":
-        black_jack()
+    #Gui.startSubWindow("Replay",modal= True)
+    #if Gui.yesNoBox("Replay", "would you like to play again",parent="Replay"):
+    #    Gui.stopSubWindow()
+    #    black_jack(False)
+
 
 def showHand(hand):
     p_hand = ""
@@ -76,4 +84,4 @@ def Conc(player_total, house_total):
         print("You win")
 
 if __name__ == "__main__":
-    black_jack()
+    black_jack(True)
