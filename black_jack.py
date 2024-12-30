@@ -2,12 +2,11 @@ from deck import Deck
 from appJar import gui
 ###from card import Card
 
+
 def black_jack(First):
     Gui = gui()
     if First:
-        Gui.startSubWindow("Start",)
-        if Gui.yesNoBox("start", "Do You want to play poker",parent="Start"):
-            Gui.stopSubWindow()
+        if Gui.yesNoBox("start", "Do You want to play poker"):
             print("Welcome to my black jack game")
         else:
             return
@@ -17,20 +16,27 @@ def black_jack(First):
     player_total,house_total = score(player_hand),score(house_hand)
     end = False
     while player_total < 21 and house_total < 21 and end == False:
-        print("Your hand is:", showHand(player_hand), "the total is: ", player_total)
-        if input("If you wish to draw another card enter y ").lower().strip() == "y":
-            player_hand.append(deck.draw())
+        hand , total = ("Your hand is:", showHand(player_hand)), ("the total is: ", player_total)
+        Gui.infoBox("show", hand + total )
+        if Gui.yesNoBox("draw", "Would you like to draw a card?"):
+            card = deck.draw()
+            player_hand.append(card)
+            card = "You draw a", card
+            Gui.infoBox("Draw", card )
         else:
             end = True
         player_total = score(player_hand)
     house_hand,deck = houseLosing(house_hand,deck,player_total)
     house_total = score(house_hand)
-    print("Your hand is:",showHand(player_hand) , player_total, "total" , "\nThe house's hand is:", showHand(house_hand), house_total, "total")
-    Conc(player_total,house_total)
-    #Gui.startSubWindow("Replay",modal= True)
-    #if Gui.yesNoBox("Replay", "would you like to play again",parent="Replay"):
-    #    Gui.stopSubWindow()
-    #    black_jack(False)
+    p_hand_Gui, p_total_Gui, h_hand_Gui, h_total_Gui = ("Your hand is:",showHand(player_hand)) , (player_total, "total" ), ("\nThe house's hand is:", showHand(house_hand)), (house_total, "total")
+    Gui.infoBox("show end", p_hand_Gui + p_total_Gui + h_hand_Gui + h_total_Gui)
+    #print("Your hand is:",showHand(player_hand) , player_total, "total" , "\nThe house's hand is:", showHand(house_hand), house_total, "total")
+    Gui.infoBox("Conclution", Conc(player_total,house_total))
+    if Gui.yesNoBox("Replay", "would you like to play again"):
+        Gui.stop()
+        black_jack(False)
+    else:
+        Gui.stop()
 
 
 def showHand(hand):
@@ -65,23 +71,23 @@ def score(hand):
 
 def Conc(player_total, house_total):
     if player_total == house_total:
-        print("Tie")
+        return("Tie")
     elif player_total > 21 or house_total > 21:
         if player_total > 21 and house_total > 21:
-            print("tie")
+            return("tie")
         elif player_total > 21:
-            print("the house wins")
+            return("the house wins")
         else:
-            print("You win")
+            return("You win")
     elif player_total == 21 or house_total == 21:
         if house_total == 21:
-            print("the house wins")
+            return("the house wins")
         else:
-            print("You win")
+            return("You win")
     elif player_total < house_total:
-        print("the house wins")
+        return("the house wins")
     else:
-        print("You win")
+        return("You win")
 
 if __name__ == "__main__":
     black_jack(True)

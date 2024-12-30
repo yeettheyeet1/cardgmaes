@@ -4,5 +4,6 @@ app = gui()
 
 app.addLabel("title","wellcome")
 app.yesNoBox("yes","Do you want to play poker")
+app.yesNoBox("yes","Do you want to play poker")
 
 app.go()
