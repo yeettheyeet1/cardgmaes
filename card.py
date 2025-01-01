@@ -5,7 +5,7 @@ class Card:
     symbol = 0
     value = 0
 
-    def __init__(self,symbol,number):
+    def __init__(self,suit,number):
         if number in range(1,15):
             self.number = number
             self.value = number
@@ -15,8 +15,8 @@ class Card:
             self.number = 0
             print("bad number")
 
-        if symbol in range(1,5):
-            self.symbol = symbol
+        if suit in range(1,5):
+            self.symbol = suit
         else:
             self.symbol = 0
             print("bad symbol")

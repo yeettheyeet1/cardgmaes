@@ -6,7 +6,7 @@ from appJar import gui
 def black_jack(First):
     Gui = gui()
     if First:
-        if Gui.yesNoBox("start", "Do You want to play poker"):
+        if Gui.yesNoBox("start", "Do You want to play black jack"):
             print("Welcome to my black jack game")
         else:
             return
@@ -44,6 +44,7 @@ def showHand(hand):
     for i in range(len(hand)):
         p_hand += str(hand[i]) + " "
     return p_hand
+
     
 def houseLosing(house_hand, deck, player_score):
     total = score(house_hand)
