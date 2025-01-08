@@ -1,5 +1,4 @@
-from deck import Deck
-from card import Card
+from items import Deck,Card
 from appJar import gui
 
 def poker(First):

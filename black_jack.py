@@ -1,13 +1,13 @@
-from deck import Deck
+from items import Deck
 from appJar import gui
-###from card import Card
+
 
 
 def black_jack(First):
     Gui = gui()
     if First:
         if Gui.yesNoBox("start", "Do You want to play black jack"):
-            print("Welcome to my black jack game")
+            Gui.infoBox("wellcone", "Wellcome to my black jack game")
         else:
             return
     deck = Deck()
