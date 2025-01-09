@@ -7,7 +7,8 @@ class Card:
     symbol = 0
     value = 0
 
-    def __init__(self,suit = 0,number = 0):
+    #the generation function of the Card class
+    def __init__(self,suit = 0,number = 0) -> None:
         if number in range(1,15):
             self.number = number
             self.value = number
@@ -23,7 +24,8 @@ class Card:
             self.symbol = 0
             print("bad symbol")
 
-    def __str__(self):
+    #the toString of the Card class, returns a string
+    def __str__(self) -> str:
         if self.symbol != 0 and self.number != 0:
             if self.number > 10:
                 return self.dict[self.number] + " of " + self.dict[self.symbol]
@@ -32,16 +34,18 @@ class Card:
         else:
             return "This card is no good"
 
-class Deck(Card):
+class Deck(Card = Card()):
 
     deck =[[],[],[],[]]
 
-    def __init__(self):
+    #the generation function of the Dack class
+    def __init__(self) -> None:
         for i in range(4):
             for ii in range(1,15):
                 self.deck[i].append(Card(i+1,ii))
         
-    def draw(self):
+    #returns a card, and changes the value in the location of the card in the dack to "drawn"
+    def draw(self) -> None:
         dra = True
         while dra:
             sym = random.randint(1,4)
@@ -52,12 +56,13 @@ class Deck(Card):
             
         return card
     
-    def isDrawn(self,card):
+    #recives a card, returns if the Card is not in the deck
+    def isDrawn(self,card = Card()) -> bool:
         return self.deck[[card.symbol-1][card.number-1]] == "drawn"
 
     
-    
-    def __str__(self):
+    #return the toString of Deck Class
+    def __str__(self) -> str:
         d = []
         for i in range(4):
             for ii in range(1,15):

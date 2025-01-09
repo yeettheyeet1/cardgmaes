@@ -1,9 +1,9 @@
-from items import Deck
+from items import Deck,Card
 from appJar import gui
 
 
-
-def black_jack(First):
+# The main black jack function, recives boolean, is void.
+def black_jack(First = False) -> None:
     Gui = gui()
     if First:
         if Gui.yesNoBox("start", "Do You want to play black jack"):
@@ -30,7 +30,6 @@ def black_jack(First):
     house_total = score(house_hand)
     p_hand_Gui, p_total_Gui, h_hand_Gui, h_total_Gui = ("Your hand is:",showHand(player_hand)) , (player_total, "total" ), ("\nThe house's hand is:", showHand(house_hand)), (house_total, "total")
     Gui.infoBox("show end", p_hand_Gui + p_total_Gui + h_hand_Gui + h_total_Gui)
-    #print("Your hand is:",showHand(player_hand) , player_total, "total" , "\nThe house's hand is:", showHand(house_hand), house_total, "total")
     Gui.infoBox("Conclution", Conc(player_total,house_total))
     if Gui.yesNoBox("Replay", "would you like to play again"):
         Gui.stop()
@@ -38,22 +37,24 @@ def black_jack(First):
     else:
         Gui.stop()
 
-
-def showHand(hand):
+#recives a card arrey, return String.
+def showHand(hand = [Card(),Card()]) -> str:
     p_hand = ""
     for i in range(len(hand)):
         p_hand += str(hand[i]) + " "
     return p_hand
 
-    
-def houseLosing(house_hand, deck, player_score):
+# recives a card arrey, deck, and an int, returns a card arrey, and a deck.
+#the function tries to make the house win.
+def houseLosing(house_hand = [Card(),Card()], deck = Deck(), player_score = 0):
     total = score(house_hand)
     while total < player_score and total < 21 and player_score < 21:
         house_hand.append(deck.draw())
         total = score(house_hand)
     return(house_hand,deck)
 
-def score(hand):
+#recives a card arrey, returns an int.
+def score(hand = [Card(),Card()]) -> int:
     total = 0
     aces=0
     for card in hand:
@@ -69,8 +70,8 @@ def score(hand):
     return total
 
 
-
-def Conc(player_total, house_total):
+#recives 2 ints, returns String.
+def Conc(player_total, house_total) -> str:
     if player_total == house_total:
         return("Tie")
     elif player_total > 21 or house_total > 21:
