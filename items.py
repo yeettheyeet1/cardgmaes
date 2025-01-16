@@ -8,7 +8,7 @@ class Card:
     value = 0
 
     #the generation function of the Card class
-    def __init__(self,suit = 0,number = 0) -> None:
+    def __init__(self,suit,number) -> None:
         if number in range(1,15):
             self.number = number
             self.value = number
@@ -34,7 +34,7 @@ class Card:
         else:
             return "This card is no good"
 
-class Deck(Card = Card()):
+class Deck(Card):
 
     deck =[[],[],[],[]]
 
@@ -57,7 +57,7 @@ class Deck(Card = Card()):
         return card
     
     #recives a card, returns if the Card is not in the deck
-    def isDrawn(self,card = Card()) -> bool:
+    def isDrawn(self,card) -> bool:
         return self.deck[[card.symbol-1][card.number-1]] == "drawn"
 
     

@@ -3,7 +3,7 @@ from appJar import gui
 
 
 # The main black jack function, recives boolean, is void.
-def black_jack(First = False) -> None:
+def black_jack(First) -> None:
     Gui = gui()
     if First:
         if Gui.yesNoBox("start", "Do You want to play black jack"):
@@ -38,7 +38,7 @@ def black_jack(First = False) -> None:
         Gui.stop()
 
 #recives a card arrey, return String.
-def showHand(hand = [Card(),Card()]) -> str:
+def showHand(hand) -> str:
     p_hand = ""
     for i in range(len(hand)):
         p_hand += str(hand[i]) + " "
@@ -46,15 +46,15 @@ def showHand(hand = [Card(),Card()]) -> str:
 
 # recives a card arrey, deck, and an int, returns a card arrey, and a deck.
 #the function tries to make the house win.
-def houseLosing(house_hand = [Card(),Card()], deck = Deck(), player_score = 0):
-    total = score(house_hand)
+def houseLosing(house_hand, deck, player_score):
+    total = score(house_hand,player_score)
     while total < player_score and total < 21 and player_score < 21:
         house_hand.append(deck.draw())
         total = score(house_hand)
     return(house_hand,deck)
 
 #recives a card arrey, returns an int.
-def score(hand = [Card(),Card()]) -> int:
+def score(hand) -> int:
     total = 0
     aces=0
     for card in hand:
