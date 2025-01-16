@@ -47,7 +47,7 @@ def showHand(hand) -> str:
 # recives a card arrey, deck, and an int, returns a card arrey, and a deck.
 #the function tries to make the house win.
 def houseLosing(house_hand, deck, player_score):
-    total = score(house_hand,player_score)
+    total = score(house_hand)
     while total < player_score and total < 21 and player_score < 21:
         house_hand.append(deck.draw())
         total = score(house_hand)
