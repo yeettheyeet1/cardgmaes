@@ -31,6 +31,7 @@ def black_jack(First) -> None:
     p_hand_Gui, p_total_Gui, h_hand_Gui, h_total_Gui = ("Your hand is:",showHand(player_hand)) , (player_total, "total" ), ("\nThe house's hand is:", showHand(house_hand)), (house_total, "total")
     Gui.infoBox("show end", p_hand_Gui + p_total_Gui + h_hand_Gui + h_total_Gui)
     Gui.infoBox("Conclution", Conc(player_total,house_total))
+    Gui.stop()
     if Gui.yesNoBox("Replay", "would you like to play again"):
         Gui.stop()
         black_jack(False)

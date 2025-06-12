@@ -4,33 +4,29 @@ class Card:
 
     dict = {1: "Clubs", 2: "Spades", 3: "Hearts", 4: "Diamonds", 11: "Jack", 12:"Queen", 13:"King", 14:"Ace"}
     number = 0
-    symbol = 0
-    value = 0
+    suit = 0
 
     #the generation function of the Card class
-    def __init__(self,suit,number) -> None:
+    def __init__(self,suit = 0,number = 0) -> None:
         if number in range(1,15):
             self.number = number
-            self.value = number
-            if self.number > 10:
-                self.value = 10
         else:
             self.number = 0
             print("bad number")
 
         if suit in range(1,5):
-            self.symbol = suit
+            self.suit = suit
         else:
-            self.symbol = 0
+            self.suit = 0
             print("bad symbol")
 
     #the toString of the Card class, returns a string
     def __str__(self) -> str:
-        if self.symbol != 0 and self.number != 0:
+        if self.suit != 0 and self.number != 0:
             if self.number > 10:
-                return self.dict[self.number] + " of " + self.dict[self.symbol]
+                return self.dict[self.number] + " of " + self.dict[self.suit]
             else:
-                return  str(self.number) + " of " + self.dict[self.symbol]
+                return  str(self.number) + " of " + self.dict[self.suit]
         else:
             return "This card is no good"
 
