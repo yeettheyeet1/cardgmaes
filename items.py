@@ -5,11 +5,15 @@ class Card:
     dict = {1: "Clubs", 2: "Spades", 3: "Hearts", 4: "Diamonds", 11: "Jack", 12:"Queen", 13:"King", 14:"Ace"}
     number = 0
     suit = 0
+    value = 0
 
     #the generation function of the Card class
     def __init__(self,suit = 0,number = 0) -> None:
         if number in range(1,15):
             self.number = number
+            self.value = number
+            if self.number > 10:
+                self.value = 10
         else:
             self.number = 0
             print("bad number")
@@ -18,7 +22,7 @@ class Card:
             self.suit = suit
         else:
             self.suit = 0
-            print("bad symbol")
+            print("bad suit")
 
     #the toString of the Card class, returns a string
     def __str__(self) -> str:
@@ -54,7 +58,7 @@ class Deck(Card):
     
     #recives a card, returns if the Card is not in the deck
     def isDrawn(self,card) -> bool:
-        return self.deck[[card.symbol-1][card.number-1]] == "drawn"
+        return self.deck[[card.suit-1][card.number-1]] == "drawn"
 
     
     #return the toString of Deck Class

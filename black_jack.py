@@ -3,13 +3,11 @@ from appJar import gui
 
 
 # The main black jack function, recives boolean, is void.
-def black_jack(First) -> None:
-    Gui = gui()
-    if First:
-        if Gui.yesNoBox("start", "Do You want to play black jack"):
-            Gui.infoBox("wellcone", "Wellcome to my black jack game")
-        else:
-            return
+def black_jack(Gui) -> None:
+    if Gui.yesNoBox("start", "Do You want to play black jack"):
+       Gui.infoBox("wellcome", "Wellcome to my black jack game")
+    else:
+        return
     deck = Deck()
     player_hand = [deck.draw(),deck.draw()]
     house_hand = [deck.draw(),deck.draw()]
@@ -33,10 +31,9 @@ def black_jack(First) -> None:
     Gui.infoBox("Conclution", Conc(player_total,house_total))
     Gui.stop()
     if Gui.yesNoBox("Replay", "would you like to play again"):
-        Gui.stop()
-        black_jack(False)
+        black_jack(Gui)
     else:
-        Gui.stop()
+        return
 
 #recives a card arrey, return String.
 def showHand(hand) -> str:

@@ -2,20 +2,16 @@ from items import Deck,Card
 from appJar import gui
 
 #The poker function recives a boolean, is void.
-def poker(First = False):
+def poker(Gui):
     type = {1: "high card", 2: "two of a kind", 3: "two pair", 4: "three of a kind", 5: "straight", 6: "flush",7: "full house", 8: "four of a kind", 9: "straight flush", 10: "royal flush"}
-    Gui = gui()
-    if First:
-        if Gui.yesNoBox("start", "Do You want to play poker?"):
-            print("Welcome to my poker game")
-        else:
-            return
+    if Gui.yesNoBox("start", "Do You want to play poker?"):
+        print("Welcome to my poker game")
+    else:
+        return
     deck = Deck()
     player_cards = [deck.draw(),deck.draw()]
     house_cards = [deck.draw(),deck.draw()]
     table_cards = [deck.draw(),deck.draw(),deck.draw()]
-    player_hand = check_Hand_Type(player_cards,table_cards)
-    house_hand = check_Hand_Type(house_cards,table_cards)
     hands =  "Your hand is: " , player_cards , "\nThe Table's cards are: " , table_cards
     Gui.infoBox("show", hands)
     fold = not (Gui.yesNoBox("start", "Do you want to fold?"))
@@ -26,13 +22,15 @@ def poker(First = False):
         Gui.infoBox("show", hands)
         if len(table_cards) < 5:
             fold = not (Gui.yesNoBox("start", "Do you want to fold?"))
+    player_hand = check_Hand_Type(player_cards,table_cards)
+    house_hand = check_Hand_Type(house_cards,table_cards)
     hands = "player: ", player_hand, " House: " , house_hand,"\n", check_Win(player_hand,house_hand)
     Gui.infoBox("show", hands)        
     if Gui.yesNoBox("Replay", "would you like to play again"):
         Gui.stop()
-        poker(False)
+        poker(Gui)
     else:
-        Gui.stop()
+        return
 
 
 # recives an arrey of cards class, returns a string of their information.
